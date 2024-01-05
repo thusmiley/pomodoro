@@ -17,8 +17,8 @@ Pomodoro Website
 
 ### Links
 
-- Repository URL: 
-- Live Site URL: 
+- Repository URL: https://github.com/thusmiley/pomodoro.git
+- Live Site URL: https://pomodoro-ten-gamma.vercel.app/
 
 ### Built with
 
@@ -27,6 +27,5 @@ Pomodoro Website
 - Mobile-first workflow
 - Tailwind
 - React (Vite)
-- React Hook Form ?
-- HeadlessUI ?
-# pomodoro
+- HeadlessUI 
+
