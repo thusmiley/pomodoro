@@ -44,7 +44,7 @@ const Clock = (props) => {
 
           <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-center">
             <h1 className="text-[80px] tracking-[-4px] text-textColor ">17:59</h1>
-            <p className="text-[14px] tracking-[13.13px] text-textColor">PAUSE</p>
+            <p className="text-[14px] tracking-[13.13px] text-textColor pl-2">PAUSE</p>
           </div>
         </div>
       </div>

@@ -27,5 +27,5 @@ Pomodoro Website
 - Mobile-first workflow
 - Tailwind
 - React (Vite)
-- HeadlessUI 
-
+- HeadlessUI
+- Framer Motion
