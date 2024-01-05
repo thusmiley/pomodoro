@@ -1,0 +1,61 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+// base 
+@layer base 
+    *
+        box-sizing: border-box
+        margin: 0
+        padding: 0
+    
+    body
+        font-synthesis: none
+        text-rendering: optimizeLegibility
+        scroll-behavior: smooth
+        @apply bg-darkNavy font-bold
+
+    input,
+    textarea,
+    button,
+    select,
+    a 
+        -webkit-tap-highlight-color: transparent
+
+    h1,h2,h3,h4,h5,h6
+        @apply font-bold
+
+// components
+@layer components
+    .box-shadow
+        box-shadow: 50px 50px 100px 0px #121530, -50px -50px 100px 0px #272C5A
+    
+    .tab-btn
+        @apply text-[#D7E0FF]/40 text-[12px] bg-[#161932] px-[22px] py-[18px] rounded-full cursor-pointer transition-all duration-300 ease-linear border-none outline-none hover:text-[#D7E0FF]
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active 
+        // transition: #1f1f1f 5000000s ease-in-out 0s
+        -webkit-box-shadow: 0 0 0 40px #fff inset 
+        -webkit-text-fill-color: inherit 
+        background-clip: content-box 
+
+// utitlities
+@layer utilities
+    .fade-in 
+        animation: fade-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both
+
+    @keyframes fade-in 
+        0% 
+            @apply bg-[#161932] 
+        100% 
+             @apply bg-red 
+
+    .form-bg
+        background: #3A3054 url('../public/images/bg-shorten-mobile.svg') no-repeat
+        background-size: contain
+        background-position: top -27px right 0
+        @screen md 
+            background: #3A3054 url('../public/images/bg-shorten-desktop.svg') no-repeat
