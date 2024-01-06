@@ -12,9 +12,9 @@ export default {
       },
     },
     fontFamily: {
-      kumbh: ["Kumbh Sans'", "sans serif"],
+      sans: ["Kumbh Sans'", "sans serif"],
       slab: ["Roboto Slab'", "serif"],
-      space: ["Space Mono", "monospace"],
+      mono: ["Space Mono", "monospace"],
     },
   },
   plugins: [],

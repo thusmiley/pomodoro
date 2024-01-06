@@ -5,26 +5,34 @@ import { Tab, Transition } from "@headlessui/react";
 import Clock from "./components/Clock";
 import Settings from "./components/Settings";
 
+const colors = ["red", "blue", "purple"];
+const fonts = ["sans", "slab", "mono"];
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 function App() {
   let [tabs] = useState({
-    pomodoro: [{ id: 1, name: "pomodoro", color: "red" }],
-    "short break": [{ id: 2, name: "short break", color: "blue" }],
-    "long break": [{ id: 3, name: "long break", color: "purple" }],
+    pomodoro: [{ id: 1, name: "pomodoro" }],
+    "short break": [{ id: 2, name: "short break" }],
+    "long break": [{ id: 3, name: "long break" }],
   });
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const loadingDuration = 3000; // 3 seconds
   const [isOpen, setIsOpen] = useState(false);
-  const [pomodoroTimer, setPomodoroTimer] = useState("25");
-  const [shortBreakTimer, setShortBreakTimer] = useState("5");
-  const [longBreakTimer, setLongBreakTimer] = useState("15");
-  const [font, setFont] = useState("sans");
-  const [color, setColor] = useState("red");
+  const [pomodoroTimer, setPomodoroTimer] = useState(25);
+  const [shortBreakTimer, setShortBreakTimer] = useState(5);
+  const [longBreakTimer, setLongBreakTimer] = useState(15);
+  const [font, setFont] = useState(fonts[0]);
+  const [color, setColor] = useState(colors[0]);
   const [controller, setController] = useState("START");
+
+  useEffect(() => {
+    document.body.className = `font-${font}`;
+    console.log(`font-${font}`);
+  }, [font]);
 
   useEffect(() => {
     let loadingTimeout = setTimeout(() => {
@@ -44,11 +52,11 @@ function App() {
       <header>
         <img src={logo} alt="pomodoro logo" className="w-[117px] h-auto object-contain object-center mt-8 mx-auto md:w-[156px] md:mt-[80px] xl:mt-[48px]" />
       </header>
-      <main className="px-6 mx-auto mb-[48px] md:mb-[103px] xl:mb-[56px]">
+      <main id="main-font" className="px-6 mx-auto mb-[48px] md:mb-[103px] xl:mb-[56px]">
         <Tab.Group>
           <Tab.List className="mt-[45px] mb-[48px] bg-[#161932] max-w-[373px] rounded-full p-2 mx-auto grid place-content-center grid-cols-3 relative md:mt-[55px] md:mb-[109px] xl:mb-[45px]">
             {Object.keys(tabs).map((tab, index) => (
-              <Tab key={index} className={({ selected }) => classNames("tab-btn", selected ? "bg-red text-darkNavy border-none outline-none hover:text-darkNavy" : "")}>
+              <Tab key={index} className={({ selected }) => classNames("tab-btn", selected ? `bg-${color} text-darkNavy border-none outline-none hover:text-darkNavy` : "")}>
                 {tab}
               </Tab>
             ))}
@@ -56,7 +64,7 @@ function App() {
           <Tab.Panels className="grid place-content-center max-w-[410px] mx-auto">
             {Object.values(tabs).map((tab, index) => (
               <Tab.Panel key={index} className={classNames("")}>
-                <Clock progress={progress} trackWidth={5} indicatorWidth={10} controller={controller} setController={setController} color={tab.color} />
+                <Clock tab={tab} progress={progress} controller={controller} setController={setController} color={color} pomodoroTimer={pomodoroTimer} shortBreakTimer={shortBreakTimer} longBreakTimer={longBreakTimer} />
               </Tab.Panel>
             ))}
           </Tab.Panels>
@@ -83,15 +91,18 @@ function App() {
           <Settings
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            // pomodoroTimer={pomodoroTimer}
-            // setPomodoroTimer={setPomodoroTimer}
-            // shortBreakTimer={shortBreakTimer}
-            // setShortBreakTimer={setShortBreakTimer}
-            // longBreakTimer={longBreakTimer}
-            // setLongBreakTimer={setLongBreakTimer}
+            pomodoroTimer={pomodoroTimer}
+            setPomodoroTimer={setPomodoroTimer}
+            shortBreakTimer={shortBreakTimer}
+            setShortBreakTimer={setShortBreakTimer}
+            longBreakTimer={longBreakTimer}
+            setLongBreakTimer={setLongBreakTimer}
+            fonts={fonts}
             font={font}
             setFont={setFont}
-            color={color} setColor={setColor}
+            colors={colors}
+            color={color}
+            setColor={setColor}
           />
         </Transition>
       </main>

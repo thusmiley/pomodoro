@@ -1,12 +1,29 @@
 import checkIcon from "../assets/check-icon.svg";
 import { RadioGroup } from "@headlessui/react";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const colors = ["red", "blue", "purple"];
-const fonts = ["sans", "slab", "mono"];
+const Settings = ({
+  isOpen,
+  setIsOpen,
+  font,
+  fonts,
+  setFont,
+  color,
+  setColor,
+  colors,
+  pomodoroTimer,
+  setPomodoroTimer,
+  shortBreakTimer,
+  setShortBreakTimer,
+  longBreakTimer,
+  setLongBreakTimer,
+}) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsOpen(!isOpen);
+  };
 
-const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
   return (
     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-6 w-full max-w-[540px] ">
       <div className="flex justify-between items-center pb-7 bg-white pt-6 rounded-t-[15px] px-6 md:py-[34px] md:px-10 md:rounded-t-[25px]">
@@ -29,7 +46,7 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
       {/* divider */}
       <div className="w-full h-[1px] bg-[#fafafa]" />
 
-      <form className="bg-white pt-6 rounded-b-[15px] px-6 relative md:pt-[34px] md:px-10 md:rounded-b-[25px]">
+      <form className="bg-white pt-6 rounded-b-[15px] px-6 relative md:pt-[34px] md:px-10 md:rounded-b-[25px]" onSubmit={handleSubmit}>
         {/* time */}
         <div>
           <h3 className="text-[11px] tracking-[4.23px] text-center mb-[15px] md:text-left md:text-[13px] md:tracking-[5px] md:mb-[26px]">TIME (MINUTES)</h3>
@@ -38,15 +55,17 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
             <div className="flex justify-between items-center md:flex-col md:justify-start">
               <h4 className="text-[12px] text-[#1E213F]/40 w-full md:mb-[10px] md:text-left">pomodoro</h4>
               <div className="bg-[#EFF1FA] rounded-[10px] flex justify-between items-center p-4 w-1/2 md:min-w-[120px]">
-                <p className="text-[14px] text-[#1E213F]">25</p>
+                <p className="text-[14px] text-[#1E213F]">{pomodoroTimer}</p>
                 <div className="space-y-[9px]">
                   <svg
-                    alt="decrease"
                     className="cursor-pointer opacity-25 transition-opacity duration-200 ease-in hover:opacity-100"
                     alt="increase"
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
                     height="7"
+                    onClick={() => {
+                      setPomodoroTimer(pomodoroTimer + 1);
+                    }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 6l6-4 6 4" />
                   </svg>
@@ -56,6 +75,9 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
                     height="7"
+                    onClick={() => {
+                      pomodoroTimer > 0 && setPomodoroTimer(pomodoroTimer - 1);
+                    }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 1l6 4 6-4" />
                   </svg>
@@ -66,15 +88,17 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
             <div className="flex justify-between items-center my-2 md:flex-col md:my-0 md:justify-start">
               <h4 className="text-[12px] text-[#1E213F]/40 w-full md:mb-[10px] md:text-left">short break</h4>
               <div className="bg-[#EFF1FA] rounded-[10px] flex justify-between items-center p-4 w-1/2 md:min-w-[120px]">
-                <p className="text-[14px] text-[#1E213F]">5</p>
+                <p className="text-[14px] text-[#1E213F]">{shortBreakTimer}</p>
                 <div className="space-y-[9px]">
                   <svg
-                    alt="decrease"
                     className="cursor-pointer opacity-25 transition-opacity duration-200 ease-in hover:opacity-100"
                     alt="increase"
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
                     height="7"
+                    onClick={() => {
+                      setShortBreakTimer(shortBreakTimer + 1);
+                    }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 6l6-4 6 4" />
                   </svg>
@@ -84,6 +108,9 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
                     height="7"
+                    onClick={() => {
+                      shortBreakTimer > 0 && setShortBreakTimer(shortBreakTimer - 1);
+                    }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 1l6 4 6-4" />
                   </svg>
@@ -94,15 +121,17 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
             <div className="flex justify-between items-center md:flex-col md:justify-start">
               <h4 className="text-[12px] text-[#1E213F]/40 w-full md:mb-[10px] md:text-left">long break</h4>
               <div className="bg-[#EFF1FA] rounded-[10px] flex justify-between items-center p-4 w-1/2 md:min-w-[120px]">
-                <p className="text-[14px] text-[#1E213F]">15</p>
+                <p className="text-[14px] text-[#1E213F]">{longBreakTimer}</p>
                 <div className="space-y-[9px]">
                   <svg
-                    alt="decrease"
                     className="cursor-pointer opacity-25 transition-opacity duration-200 ease-in hover:opacity-100"
                     alt="increase"
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
                     height="7"
+                    onClick={() => {
+                      setLongBreakTimer(longBreakTimer + 1);
+                    }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 6l6-4 6 4" />
                   </svg>
@@ -112,6 +141,9 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
                     height="7"
+                    onClick={() => {
+                      longBreakTimer > 0 && setLongBreakTimer(longBreakTimer - 1);
+                    }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 1l6 4 6-4" />
                   </svg>
@@ -148,13 +180,15 @@ const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
         <div className="pb-[59px] md:flex md:justify-between md:items-center">
           <h3 className="text-[11px] tracking-[4.23px] text-center mb-[18px] md:mb-0 md:text-[13px] md:tracking-[5px] ">COLOR</h3>
           <RadioGroup value={color} onChange={setColor} className={`flex items-center justify-center space-x-4`}>
-            {colors.map((type) => (
+            {colors.map((color) => (
               <RadioGroup.Option
-                key={type}
-                value={type}
+                key={color}
+                value={color}
                 className={({ active, checked }) =>
                   `${active ? "ring-1 ring-[#EFF1FA]" : ""} ${checked ? "" : ""} 
-                bg-${type} cursor-pointer w-10 h-10 rounded-full grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
+                ${color === "red" ? "bg-red" : ""} ${color === "blue" ? "bg-blue" : ""} ${
+                    color === "purple" ? "bg-purple" : ""
+                  } cursor-pointer w-10 h-10 rounded-full grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
                 }
               >
                 {({ checked }) => <img src={checkIcon} alt="theme red" className={checked ? "opacity-100 transition-opacity duration-200 ease-linear" : "opacity-0"} />}

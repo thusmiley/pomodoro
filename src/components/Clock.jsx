@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./clock.css";
 
 const Clock = (props) => {
@@ -6,47 +6,72 @@ const Clock = (props) => {
     size = 248.05,
     progress = 0,
     trackWidth = 11,
-    trackColor = `#161932`,
-    indicatorWidth = 10,
-    indicatorColor = `#F87070`,
-    indicatorCap = `round`,
-    label = `Loading...`,
-    labelColor = `#333`,
+    indicatorWidth = 11,
     spinnerMode = false,
     spinnerSpeed = 1,
     controller,
-    setController, color
+    setController,
+    color,
+    tab,
+    pomodoroTimer,
+    shortBreakTimer,
+    longBreakTimer,
   } = props;
+
+  // useEffect(() => {
+  //   console.log(tabName);
+  //   switch (tabName) {
+  //     case "pomodoro":
+  //       setTimeLabel(pomodoroTimer);
+  //     case "short break":
+  //       setTimeLabel(shortBreakTimer);
+  //     case "long break":
+  //       setTimeLabel(longBreakTimer);
+  //   }
+  //   console.log(timeLabel);
+  // }, [timeLabel]);
 
   const center = size / 2,
     radius = center - (trackWidth > indicatorWidth ? trackWidth : indicatorWidth),
     dashArray = 2 * Math.PI * radius,
     dashOffset = dashArray * ((100 - progress) / 100);
 
+  const covertColorCode = (color) => {
+    switch (color) {
+      case "red":
+        return `#F87070`;
+      case "blue":
+        return `#70F3F8`;
+      case "purple":
+        return `#D881F8`;
+    }
+  };
+
+
   return (
     <div className="box-shadow rounded-full p-[16px] gradient-bg">
       <div className="bg-[#161932] rounded-full p-[3px] relative">
-        <div className="svg-pi-wrapper " style={{ width: size, height: size }}>
+        <div className={`relative w-${size} h-${size}`}>
           <svg className="svg-pi" style={{ width: size, height: size }}>
-            <circle className="svg-pi-track" cx={center} cy={center} fill="transparent" r={radius} stroke={trackColor} strokeWidth={trackWidth} />
+            <circle className="" cx={center} cy={center} fill="transparent" r={radius} stroke="#161932" strokeWidth={trackWidth} />
             <circle
-              className={`svg-pi-indicator ${spinnerMode ? "svg-pi-indicator--spinner" : ""}`}
+              className={``}
               style={{ animationDuration: spinnerSpeed * 1000 }}
               cx={center}
               cy={center}
               fill="transparent"
               r={radius}
-              stroke={indicatorColor}
+              stroke={covertColorCode(color)}
               strokeWidth={indicatorWidth}
               strokeDasharray={dashArray}
               strokeDashoffset={dashOffset}
-              strokeLinecap={indicatorCap}
+              strokeLinecap="round"
             />
           </svg>
 
           <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-center">
-            <h1 className="text-[80px] tracking-[-4px] text-textColor ">17:59</h1>
-            <p className="text-[14px] tracking-[13.13px] text-textColor pl-2 cursor-pointer transition-all duration-200 ease-linear hover:text-red">{controller}</p>
+            <h1 className="text-[80px] tracking-[-4px] text-textColor ">25:00</h1>
+            <p className={`text-[14px] tracking-[13.13px] text-textColor pl-2 cursor-pointer transition-all duration-200 ease-linear hover:text-${color}`}>{controller}</p>
           </div>
         </div>
       </div>
