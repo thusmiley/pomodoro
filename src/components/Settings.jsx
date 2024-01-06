@@ -2,12 +2,11 @@ import checkIcon from "../assets/check-icon.svg";
 import { RadioGroup } from "@headlessui/react";
 import { useState, Fragment } from "react";
 import { motion } from "framer-motion";
-import "./settings.css";
 
-const Settings = ({ isOpen, setIsOpen }) => {
-  const [font, setFont] = useState("sans");
-  const [color, setColor] = useState("red");
+const colors = ["red", "blue", "purple"];
+const fonts = ["sans", "slab", "mono"];
 
+const Settings = ({ isOpen, setIsOpen, font, setFont, color, setColor }) => {
   return (
     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-6 w-full max-w-[540px] ">
       <div className="flex justify-between items-center pb-7 bg-white pt-6 rounded-t-[15px] px-6 md:py-[34px] md:px-10 md:rounded-t-[25px]">
@@ -127,78 +126,44 @@ const Settings = ({ isOpen, setIsOpen }) => {
         <div className="md:flex md:justify-between md:items-center">
           <h3 className="text-[11px] tracking-[4.23px] text-center mb-[18px] md:mb-0 md:text-[13px] md:tracking-[5px]">FONT</h3>
           <RadioGroup value={font} onChange={setFont} className={`flex items-center justify-center space-x-4`}>
-            <RadioGroup.Option
-              value="sans"
-              className={({ active, checked }) =>
-                `${active ? "ring-1 ring-[#EFF1FA]" : ""}
+            {fonts.map((type) => (
+              <RadioGroup.Option
+                key={type}
+                value={type}
+                className={({ active, checked }) =>
+                  `${active ? "ring-1 ring-[#EFF1FA]" : ""}
                   ${checked ? "bg-[#161932] text-white transition-all duration-300 ease-linear" : "bg-[#EFF1FA] text-darkNavy/70"}
                    cursor-pointer w-10 h-10 rounded-full text-[15px] grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
-              }
-            >
-              Aa
-            </RadioGroup.Option>
-            <RadioGroup.Option
-              value="slab"
-              className={({ active, checked }) =>
-                `${active ? "ring-1 ring-[#EFF1FA]" : ""}
-                  ${checked ? "bg-[#161932] text-white transition-all duration-300 ease-linear" : "bg-[#EFF1FA] text-darkNavy/70"}
-                   cursor-pointer w-10 h-10 rounded-full text-[15px] grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
-              }
-            >
-              Aa
-            </RadioGroup.Option>
-            <RadioGroup.Option
-              value="mono"
-              className={({ active, checked }) =>
-                `${active ? "ring-1 ring-[#EFF1FA]" : ""}
-                  ${checked ? "bg-[#161932] text-white transition-all duration-300 ease-linear" : "bg-[#EFF1FA] text-darkNavy/70"} 
-                   cursor-pointer w-10 h-10 rounded-full text-[15px] grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
-              }
-            >
-              Aa
-            </RadioGroup.Option>
+                }
+              >
+                Aa
+              </RadioGroup.Option>
+            ))}
           </RadioGroup>
         </div>
         {/* divider */}
         <div className="w-full h-[1px] bg-[#E3E1E1] my-6" />
+
         {/* color */}
         <div className="pb-[59px] md:flex md:justify-between md:items-center">
           <h3 className="text-[11px] tracking-[4.23px] text-center mb-[18px] md:mb-0 md:text-[13px] md:tracking-[5px] ">COLOR</h3>
           <RadioGroup value={color} onChange={setColor} className={`flex items-center justify-center space-x-4`}>
-            <RadioGroup.Option
-              value="red"
-              className={({ active, checked }) =>
-                `${active ? "ring-1 ring-[#EFF1FA]" : ""}
-                  ${checked ? "" : ""} bg-red
-                   cursor-pointer w-10 h-10 rounded-full grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
-              }
-            >
-              {({ checked }) => <img src={checkIcon} alt="" className={checked ? "opacity-100 transition-opacity duration-200 ease-linear" : "opacity-0"} />}
-            </RadioGroup.Option>
-            <RadioGroup.Option
-              value="blue"
-              className={({ active, checked }) =>
-                `${active ? "ring-1 ring-[#EFF1FA]" : ""}
-                  ${checked ? "" : ""} bg-blue
-                   cursor-pointer w-10 h-10 rounded-full text-[15px] grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
-              }
-            >
-              {({ checked }) => <img src={checkIcon} alt="" className={checked ? "opacity-100 transition-opacity duration-200 ease-linear" : "opacity-0"} />}
-            </RadioGroup.Option>
-            <RadioGroup.Option
-              value="purple"
-              className={({ active, checked }) =>
-                `${active ? "ring-1 ring-[#EFF1FA]" : ""}
-                  ${checked ? "" : ""} bg-purple 
-                   cursor-pointer w-10 h-10 rounded-full text-[15px] grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
-              }
-            >
-              {({ checked }) => <img src={checkIcon} alt="" className={checked ? "opacity-100 transition-opacity duration-200 ease-linear" : "opacity-0"} />}
-            </RadioGroup.Option>
+            {colors.map((type) => (
+              <RadioGroup.Option
+                key={type}
+                value={type}
+                className={({ active, checked }) =>
+                  `${active ? "ring-1 ring-[#EFF1FA]" : ""} ${checked ? "" : ""} 
+                bg-${type} cursor-pointer w-10 h-10 rounded-full grid place-content-center hover:ring-1 hover:ring-[#EFF1FA] hover:ring-offset-2`
+                }
+              >
+                {({ checked }) => <img src={checkIcon} alt="theme red" className={checked ? "opacity-100 transition-opacity duration-200 ease-linear" : "opacity-0"} />}
+              </RadioGroup.Option>
+            ))}
           </RadioGroup>
         </div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-          <button type="submit" className="bg-red text-[16px] text-white py-5 px-[47px] rounded-full absolute bottom-[-30px] left-0 right-0 mx-auto w-[140px] hover:bg-[#F87070]">
+          <button type="submit" className="bg-red text-[16px] text-white py-5 px-[47px] rounded-full absolute bottom-[-30px] left-0 right-0 mx-auto w-[140px]">
             Apply
           </button>
         </motion.div>

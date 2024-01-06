@@ -4,9 +4,11 @@ import settingsIcon from "./assets/icon-settings.svg";
 import { Tab, Transition } from "@headlessui/react";
 import Clock from "./components/Clock";
 import Settings from "./components/Settings";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
 function App() {
   let [tabs] = useState({
     pomodoro: [{ id: 1, name: "pomodoro", color: "red" }],
@@ -78,7 +80,19 @@ function App() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Settings isOpen={isOpen} setIsOpen={setIsOpen} pomodoroTimer={pomodoroTimer} setPomodoroTimer={setPomodoroTimer} shortBreakTimer={shortBreakTimer} setShortBreakTimer={setShortBreakTimer} longBreakTimer={longBreakTimer} setLongBreakTimer={ setLongBreakTimer} />
+          <Settings
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            // pomodoroTimer={pomodoroTimer}
+            // setPomodoroTimer={setPomodoroTimer}
+            // shortBreakTimer={shortBreakTimer}
+            // setShortBreakTimer={setShortBreakTimer}
+            // longBreakTimer={longBreakTimer}
+            // setLongBreakTimer={setLongBreakTimer}
+            font={font}
+            setFont={setFont}
+            color={color} setColor={setColor}
+          />
         </Transition>
       </main>
     </>

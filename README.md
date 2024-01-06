@@ -28,3 +28,4 @@ Pomodoro Website
 - Tailwind
 - React (Vite)
 - HeadlessUI
+- Framer Motion
