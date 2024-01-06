@@ -4,12 +4,25 @@ import settingsIcon from "./assets/icon-settings.svg";
 import { Tab, Transition } from "@headlessui/react";
 import Clock from "./components/Clock";
 import Settings from "./components/Settings";
-
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 function App() {
+  let [tabs] = useState({
+    pomodoro: [{ id: 1, name: "pomodoro", color: "red" }],
+    "short break": [{ id: 2, name: "short break", color: "blue" }],
+    "long break": [{ id: 3, name: "long break", color: "purple" }],
+  });
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const loadingDuration = 3000; // 3 seconds
   const [isOpen, setIsOpen] = useState(false);
+  const [pomodoroTimer, setPomodoroTimer] = useState("25");
+  const [shortBreakTimer, setShortBreakTimer] = useState("5");
+  const [longBreakTimer, setLongBreakTimer] = useState("15");
+  const [font, setFont] = useState("sans");
+  const [color, setColor] = useState("red");
+  const [controller, setController] = useState("START");
 
   useEffect(() => {
     let loadingTimeout = setTimeout(() => {
@@ -31,31 +44,19 @@ function App() {
       </header>
       <main className="px-6 mx-auto mb-[48px] md:mb-[103px] xl:mb-[56px]">
         <Tab.Group>
-          <Tab.List as={Fragment}>
-            <div className="mt-[45px] mb-[48px] bg-[#161932] max-w-[373px] rounded-full p-2 mx-auto grid place-content-center grid-cols-3 relative md:mt-[55px] md:mb-[109px] xl:mb-[45px]">
-              <Tab as={Fragment}>
-                {({ selected }) => <button className={`${selected ? "bg-red text-darkNavy border-none outline-none hover:text-darkNavy" : ""} tab-btn`}>pomodoro</button>}
+          <Tab.List className="mt-[45px] mb-[48px] bg-[#161932] max-w-[373px] rounded-full p-2 mx-auto grid place-content-center grid-cols-3 relative md:mt-[55px] md:mb-[109px] xl:mb-[45px]">
+            {Object.keys(tabs).map((tab, index) => (
+              <Tab key={index} className={({ selected }) => classNames("tab-btn", selected ? "bg-red text-darkNavy border-none outline-none hover:text-darkNavy" : "")}>
+                {tab}
               </Tab>
-              <Tab as={Fragment}>
-                {({ selected }) => <button className={`${selected ? "bg-red text-darkNavy border-none outline-none hover:text-darkNavy" : ""} tab-btn`}>short break</button>}
-              </Tab>
-              <Tab as={Fragment}>
-                {({ selected }) => <button className={`${selected ? "bg-red text-darkNavy border-none outline-none hover:text-darkNavy" : ""} tab-btn`}>long break</button>}
-              </Tab>
-            </div>
+            ))}
           </Tab.List>
-          <Tab.Panels as={Fragment}>
-            <div className="grid place-content-center max-w-[410px] mx-auto">
-              <Tab.Panel>
-                <Clock progress={progress} trackWidth={5} indicatorWidth={10} />
+          <Tab.Panels className="grid place-content-center max-w-[410px] mx-auto">
+            {Object.values(tabs).map((tab, index) => (
+              <Tab.Panel key={index} className={classNames("")}>
+                <Clock progress={progress} trackWidth={5} indicatorWidth={10} controller={controller} setController={setController} color={tab.color} />
               </Tab.Panel>
-              <Tab.Panel>
-                <Clock progress={progress} trackWidth={5} indicatorWidth={10} />
-              </Tab.Panel>
-              <Tab.Panel>
-                <Clock progress={progress} trackWidth={5} indicatorWidth={10} />
-              </Tab.Panel>
-            </div>
+            ))}
           </Tab.Panels>
         </Tab.Group>
 
@@ -77,7 +78,7 @@ function App() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Settings isOpen={isOpen} setIsOpen={setIsOpen} />
+          <Settings isOpen={isOpen} setIsOpen={setIsOpen} pomodoroTimer={pomodoroTimer} setPomodoroTimer={setPomodoroTimer} shortBreakTimer={shortBreakTimer} setShortBreakTimer={setShortBreakTimer} longBreakTimer={longBreakTimer} setLongBreakTimer={ setLongBreakTimer} />
         </Transition>
       </main>
     </>
