@@ -29,3 +29,4 @@ Pomodoro Website
 - React (Vite)
 - HeadlessUI
 - Framer Motion
+- React countdown circle timer

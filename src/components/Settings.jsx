@@ -24,9 +24,6 @@ const Settings = ({
     setIsOpen(!isOpen);
   };
 
-  console.log(color);
-  console.log(font);
-
   return (
     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-6 w-full max-w-[540px] ">
       <div className="flex justify-between items-center pb-7 bg-white pt-6 rounded-t-[15px] px-6 md:py-[34px] md:px-10 md:rounded-t-[25px]">
@@ -67,7 +64,7 @@ const Settings = ({
                     width="14"
                     height="7"
                     onClick={() => {
-                      setPomodoroTimer(pomodoroTimer + 1);
+                      pomodoroTimer < 60 && setPomodoroTimer(pomodoroTimer + 1);
                     }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 6l6-4 6 4" />
@@ -100,7 +97,7 @@ const Settings = ({
                     width="14"
                     height="7"
                     onClick={() => {
-                      setShortBreakTimer(shortBreakTimer + 1);
+                      shortBreakTimer < 60 && setShortBreakTimer(shortBreakTimer + 1);
                     }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 6l6-4 6 4" />
@@ -133,7 +130,7 @@ const Settings = ({
                     width="14"
                     height="7"
                     onClick={() => {
-                      setLongBreakTimer(longBreakTimer + 1);
+                      longBreakTimer < 60 && setLongBreakTimer(longBreakTimer + 1);
                     }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 6l6-4 6 4" />

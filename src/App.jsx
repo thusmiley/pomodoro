@@ -3,6 +3,7 @@ import logo from "./assets/logo.svg";
 import settingsIcon from "./assets/icon-settings.svg";
 import { Tab, Transition } from "@headlessui/react";
 import Clock from "./components/Clock";
+import Clock2 from "./components/Clock";
 import Settings from "./components/Settings";
 
 const colors = ["red", "blue", "purple"];
@@ -31,21 +32,7 @@ function App() {
 
   useEffect(() => {
     document.body.className = `font-${font}`;
-    console.log(`font-${font}`);
   }, [font]);
-
-  useEffect(() => {
-    let loadingTimeout = setTimeout(() => {
-      if (loading >= 100) return;
-      setProgress(progress -1);
-    }, loadingDuration / 100);
-    if (progress === 0) {
-      setLoading(false);
-    }
-    return () => {
-      clearTimeout(loadingTimeout);
-    };
-  }, [progress, loading]);
 
   return (
     <>
@@ -63,12 +50,9 @@ function App() {
           </Tab.List>
           <Tab.Panels className="grid place-content-center max-w-[410px] mx-auto">
             {Object.values(tabs).map((tab, index) => (
-              <Tab.Panel key={index} className={classNames("")}>
+              <Tab.Panel key={index}>
                 <Clock
                   tab={tab}
-                  progress={progress}
-                  trackWidth={11}
-                  indicatorWidth={11}
                   controller={controller}
                   setController={setController}
                   color={color}
