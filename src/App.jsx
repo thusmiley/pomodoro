@@ -37,9 +37,9 @@ function App() {
   useEffect(() => {
     let loadingTimeout = setTimeout(() => {
       if (loading >= 100) return;
-      setProgress(progress + 1);
+      setProgress(progress -1);
     }, loadingDuration / 100);
-    if (progress === 100) {
+    if (progress === 0) {
       setLoading(false);
     }
     return () => {
@@ -54,7 +54,7 @@ function App() {
       </header>
       <main id="main-font" className="px-6 mx-auto mb-[48px] md:mb-[103px] xl:mb-[56px]">
         <Tab.Group>
-          <Tab.List className="mt-[45px] mb-[48px] bg-[#161932] max-w-[373px] rounded-full p-2 mx-auto grid place-content-center grid-cols-3 relative md:mt-[55px] md:mb-[109px] xl:mb-[45px]">
+          <Tab.List className="mt-[45px] mb-[48px] bg-[#161932] max-w-[410px] rounded-full p-2 mx-auto grid place-content-center grid-cols-3 relative md:mt-[55px] md:mb-[109px] xl:mb-[45px]">
             {Object.keys(tabs).map((tab, index) => (
               <Tab key={index} className={({ selected }) => classNames("tab-btn", selected ? `bg-${color} text-darkNavy border-none outline-none hover:text-darkNavy` : "")}>
                 {tab}
@@ -64,7 +64,18 @@ function App() {
           <Tab.Panels className="grid place-content-center max-w-[410px] mx-auto">
             {Object.values(tabs).map((tab, index) => (
               <Tab.Panel key={index} className={classNames("")}>
-                <Clock tab={tab} progress={progress} controller={controller} setController={setController} color={color} pomodoroTimer={pomodoroTimer} shortBreakTimer={shortBreakTimer} longBreakTimer={longBreakTimer} />
+                <Clock
+                  tab={tab}
+                  progress={progress}
+                  trackWidth={11}
+                  indicatorWidth={11}
+                  controller={controller}
+                  setController={setController}
+                  color={color}
+                  pomodoroTimer={pomodoroTimer}
+                  shortBreakTimer={shortBreakTimer}
+                  longBreakTimer={longBreakTimer}
+                />
               </Tab.Panel>
             ))}
           </Tab.Panels>

@@ -25,7 +25,7 @@
   font-size: 0.75em;
 } */
 
-.svg-pi-label__progress {
+/* .svg-pi-label__progress {
   font-size: 1.5em;
   font-weight: bold;
 }
@@ -33,15 +33,15 @@
 .svg-pi-label__loading,
 .svg-pi-label__progress {
   display: block;
-}
+} */
 
 /* Spinner animation */
 @keyframes spinner {
   0% {
-    transform: rotate(0);
+    transform: rotate(360deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotate(0);
   }
 }
 

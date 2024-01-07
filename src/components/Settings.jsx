@@ -24,6 +24,9 @@ const Settings = ({
     setIsOpen(!isOpen);
   };
 
+  console.log(color);
+  console.log(font);
+
   return (
     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] px-6 w-full max-w-[540px] ">
       <div className="flex justify-between items-center pb-7 bg-white pt-6 rounded-t-[15px] px-6 md:py-[34px] md:px-10 md:rounded-t-[25px]">

@@ -1,6 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  safelist: [
+    {
+      pattern: /font-(sans|slab|mono)/,
+      variants: ["lg", "hover", "focus", "lg:hover"],
+    },
+    {
+      pattern: /text-(red|purple|blue)/,
+      variants: ["lg", "hover", "focus", "lg:hover"],
+    },
+  ],
   theme: {
     extend: {
       colors: {
@@ -12,8 +22,8 @@ export default {
       },
     },
     fontFamily: {
-      sans: ["Kumbh Sans'", "sans serif"],
-      slab: ["Roboto Slab'", "serif"],
+      sans: ["Kumbh Sans", "sans serif"],
+      slab: ["Roboto Slab", "serif"],
       mono: ["Space Mono", "monospace"],
     },
   },
