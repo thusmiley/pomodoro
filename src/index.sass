@@ -32,20 +32,3 @@
     .tab-btn
         @apply text-[#D7E0FF]/40 text-[12px] bg-[#161932] px-1 py-[18px] tracking-tighter rounded-full cursor-pointer transition-all duration-300 ease-linear border-none outline-none hover:text-[#D7E0FF] sm:tracking-normal md:text-[14px] md:px-4 md:py-5
 
-// utitlities
-@layer utilities
-    .fade-in 
-        animation: fade-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both
-
-    @keyframes fade-in 
-        0% 
-            @apply bg-[#161932] 
-        100% 
-             @apply bg-red 
-
-    .form-bg
-        background: #3A3054 url('../public/images/bg-shorten-mobile.svg') no-repeat
-        background-size: contain
-        background-position: top -27px right 0
-        @screen md 
-            background: #3A3054 url('../public/images/bg-shorten-desktop.svg') no-repeat
