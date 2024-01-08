@@ -29,6 +29,19 @@ function App() {
   const [font, setFont] = useState(fonts[0]);
   const [color, setColor] = useState(colors[0]);
   const [controller, setController] = useState("START");
+  const [isMobile, setIsMobile] = useState(false);
+
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  });
 
   useEffect(() => {
     document.body.className = `font-${font}`;
@@ -59,6 +72,7 @@ function App() {
                   pomodoroTimer={pomodoroTimer}
                   shortBreakTimer={shortBreakTimer}
                   longBreakTimer={longBreakTimer}
+                  isMobile={isMobile}
                 />
               </Tab.Panel>
             ))}
@@ -72,7 +86,7 @@ function App() {
           onClick={() => setIsOpen(!isOpen)}
         />
 
-        {isOpen && <div className="w-full h-full fixed bg-[#0A0C1C]/50 top-0 left-0 right-0 bottom-0" onClick={() => setIsOpen(!isOpen)} />}
+        {isOpen && <div className="w-full h-full fixed bg-[#0A0C1C]/50 top-0 left-0 right-0 bottom-0" />}
 
         <Transition
           show={isOpen}

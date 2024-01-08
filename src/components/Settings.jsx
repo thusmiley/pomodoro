@@ -19,6 +19,7 @@ const Settings = ({
   longBreakTimer,
   setLongBreakTimer,
 }) => {
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
@@ -76,7 +77,7 @@ const Settings = ({
                     width="14"
                     height="7"
                     onClick={() => {
-                      pomodoroTimer > 0 && setPomodoroTimer(pomodoroTimer - 1);
+                      pomodoroTimer > 1 && setPomodoroTimer(pomodoroTimer - 1);
                     }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 1l6 4 6-4" />
@@ -109,7 +110,7 @@ const Settings = ({
                     width="14"
                     height="7"
                     onClick={() => {
-                      shortBreakTimer > 0 && setShortBreakTimer(shortBreakTimer - 1);
+                      shortBreakTimer > 1 && setShortBreakTimer(shortBreakTimer - 1);
                     }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 1l6 4 6-4" />
@@ -142,7 +143,7 @@ const Settings = ({
                     width="14"
                     height="7"
                     onClick={() => {
-                      longBreakTimer > 0 && setLongBreakTimer(longBreakTimer - 1);
+                      longBreakTimer > 1 && setLongBreakTimer(longBreakTimer - 1);
                     }}
                   >
                     <path fill="none" stroke="#1E213F" strokeWidth="2" d="M1 1l6 4 6-4" />
